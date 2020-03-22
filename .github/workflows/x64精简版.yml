@@ -6,30 +6,32 @@
 # Blog: https://p3terx.com
 #=================================================
 
-name: Build OpenWrt
+name: x64精简版
 
 on:
-  release:
-    types: published
-  push:
-    branches:
-      - master
-    paths:
-      - '.config'
-#  schedule:
-#    - cron: 0 8 * * 5
-#  watch:
-#    types: started
+#  release:
+#    types: published
+#  push:
+#    branches:
+#      - master
+#    paths:
+#      - 'x64精简版.config'
+  schedule:
+    - cron: 0 3 * * *
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: .config
-  DIY_SH: diy.sh
+  CONFIG_FILE: x64精简版.config
+  DIY_SH: x64精简版.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
+  UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
+  FILE_NAME: x64精简版
 
 jobs:
   build:
@@ -37,6 +39,9 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
+    - name: WeChat notification
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}开始编译
+      
     - name: Checkout
       uses: actions/checkout@master
 
@@ -51,10 +56,26 @@ jobs:
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
         curl -fsSL https://raw.githubusercontent.com/P3TERX/dotfiles/master/.bashrc >> ~/.bashrc
-
-    - name: Clone source code
-      run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
-
+    - name: Clone source code # 克隆的源代码
+      id: openwrt
+      run: |
+        git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+        cd openwrt
+        useVersionInfo=$(git show -s --date=short --format="Author: %an<br/>date: %cd<br/>commit: %s<br/>commit hash: %H")
+        echo "::set-env name=useVersionInfo::$useVersionInfo"
+        echo "::set-env name=DATE::$(date "+%Y-%m-%d %H:%M:%S")"
+    - name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+        name: ${{ env.DATE }} 🚀 x64精简版 | 自动编译
+		allowUpdates: true
+        tag:Lean
+        commit: master
+        token: ${{ secrets.RELEASES_TOKEN }}
+        body: |
+		  🚀 如需添加额外的插件或依赖请到http://bin000000.top:9666 自取。
+          当前使用版本:（编译前的最后一次源码更新记录,源码来自https://github.com/coolsnowwolf/lede ）
+          ${{ env.useVersionInfo }}
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
@@ -68,7 +89,6 @@ jobs:
         chmod +x $DIY_SH
         cd openwrt
         ../$DIY_SH
-
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
       if: env.SSH_ACTIONS == 'true'
@@ -81,7 +101,6 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-
     - name: Compile the firmware
       id: compile
       run: |
@@ -89,7 +108,6 @@ jobs:
         echo -e "$(nproc) thread compile"
         make -j$(nproc) || make -j1 V=s
         echo "::set-output name=status::success"
-
     - name: Upload bin directory
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
@@ -105,10 +123,20 @@ jobs:
         rm -rf packages
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
-
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt_firmware
+        name: x64精简版
         path: ${{ env.FIRMWARE }}
+
+    - name: Upload to release
+      uses: softprops/action-gh-release@v1
+      if: env.UPLOAD_RELEASE == 'true' && startsWith(github.ref, 'refs/tags/')
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASES_TOKEN }}
+      with:
+        files: ${{ env.FIRMWARE }}/*
+
+    - name: WeChat notification
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}编译完成
