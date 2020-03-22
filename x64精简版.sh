@@ -5,7 +5,7 @@
     echo 'CONFIG_KERNEL_BUILD_USER="Bin"' >>.config ||
     sed -i 's@\(CONFIG_KERNEL_BUILD_USER=\).*@\1$"Bin"@' .config
 #移除不用软件包    
-rm -rf luci-app-dockerman package/lean 
+rm -rf package/lean/luci-app-dockerman
 #添加额外软件包
 git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
 git clone https://github.com/KFERMercer/luci-app-dockerman.git package/luci-app-dockerman
