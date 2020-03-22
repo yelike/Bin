@@ -114,7 +114,7 @@ jobs:
       with:
         name: ${{ env.DATE }} 🚀 x64精简版 | 自动编译
         allowUpdates: true
-        tag: Lean
+        tag: x64精简版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
