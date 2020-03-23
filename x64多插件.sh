@@ -13,9 +13,13 @@ svn co https://github.com/Lienol/openwrt-package/trunk/package/brook package/bro
 svn co https://github.com/Lienol/openwrt-package/trunk/package/chinadns-ng package/chinadns-ng
 svn co https://github.com/Lienol/openwrt-package/trunk/package/tcping package/tcping
 svn co https://github.com/Lienol/openwrt-package/trunk/lienol/luci-app-passwall package/luci-app-dockerman
-svn co https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
-
-
+git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
+git clone https://github.com/bin20088/luci-theme-argon-mc.git package/luci-theme-argon-mc
+git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-theme-opentomcat
+git clone https://github.com/aboutboy/luci-theme-butongwifi.git package/luci-theme-butongwifi
+git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git package/luci-theme-atmaterial
+git clone https://github.com/tzxiaozhen88/luci-app-koolproxyR.git package/luci-app-koolproxyR
+git clone https://github.com/bin20088/luci-app-koolddns.git package/luci-app-koolddns
 #添加神秘代码
 svn co https://github.com/bin20088/lede/trunk/files
 ./scripts/feeds update -a
