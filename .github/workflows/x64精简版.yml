@@ -20,6 +20,7 @@ env:
   DIY_SH: x64精简版.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
+  UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
   FILE_NAME: x64精简版
 
