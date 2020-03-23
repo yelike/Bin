@@ -8,8 +8,8 @@ on:
 #      - master
 #    paths:
 #      - 'n1精简版.config'
-  schedule:
-    - cron: 0 3 * * *
+#  schedule:
+#    - cron: 0 3 * * *
   watch:
     types: started
 
@@ -20,6 +20,7 @@ env:
   DIY_SH: n1精简版.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
+  UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
   FILE_NAME: n1精简版
 
