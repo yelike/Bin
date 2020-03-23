@@ -10,8 +10,8 @@ on:
 #      - 'x64多插件.config'
   schedule:
     - cron: 10 21 * * *
-  watch:
-    types: started
+#  watch:
+#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
