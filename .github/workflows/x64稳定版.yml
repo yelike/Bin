@@ -1,4 +1,4 @@
-name: x64精简版
+name: x64稳定版
 
 on:
 #  release:
@@ -7,7 +7,7 @@ on:
 #    branches:
 #      - master
 #    paths:
-#      - 'x64精简版.config'
+#      - 'x64稳定版.config'
   schedule:
     - cron: 10 21 * * *
   watch:
@@ -16,13 +16,13 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: x64精简版.config
-  DIY_SH: x64精简版.sh
+  CONFIG_FILE: x64稳定版.config
+  DIY_SH: x64稳定版.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
-  FILE_NAME: x64精简版
+  FILE_NAME: x64稳定版
 
 jobs:
   build:
@@ -107,15 +107,15 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: x64精简版
+        name: x64稳定版
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} 🚀 x64精简版 | 自动编译
+        name: ${{ env.DATE }} 🚀 x64稳定版 | 自动编译
         allowUpdates: true
-        tag: x64精简版
+        tag: x64稳定版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
