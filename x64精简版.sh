@@ -1,9 +1,8 @@
 #!/bin/bash
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
-[ -z $(grep "CONFIG_KERNEL_BUILD_USER=" .config) ] &&
-    echo 'CONFIG_KERNEL_BUILD_USER="Bin"' >>.config ||
-    sed -i 's@\(CONFIG_KERNEL_BUILD_USER=\).*@\1$"Bin"@' .config
+#修改版本号
+sed -i 's/OpenWrt/Bin build $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
 #移除不用软件包    
 rm -rf package/lean/luci-app-dockerman
 #添加额外软件包
