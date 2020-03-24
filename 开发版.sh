@@ -22,3 +22,6 @@ git clone https://github.com/bin20088/luci-app-koolddns.git package/luci-app-koo
 svn co https://github.com/bin20088/lede/trunk/files
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+#赋予koolddns权限
+chmod 0755 package/luci-app-koolddns/root/etc/init.d/koolddns
+chmod 0755 package/luci-app-koolddns/root/usr/share/koolddns/aliddns
