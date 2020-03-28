@@ -5,7 +5,7 @@
 
 ## 使用方法
 
-前面的自动编译以及个性化定制等修改，全部来源于P3TERX大佬的教程：https://p3terx.com/archives/build-openwrt-with-github-actions.html </br>
+前面的自动编译以及个性化定制等修改，全部来源于[P3TERX大佬](https://p3terx.com/archives/build-openwrt-with-github-actions.html)的教程。</br>
 这里只说发布release的方法：</br>
  1、自动编译及自动发布你也可以使用本仓库模板，请点击上面的Use this template(使用此模板）来创建你自己的新仓库。</br>
  2、点击右上角你的头像-settings-Developer settings-Personal access tokens生成新的令牌，下面的选项全部选中，随便起名保存，同时复制令牌内容。</br>
