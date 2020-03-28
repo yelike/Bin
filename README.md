@@ -16,5 +16,5 @@
  
 ## Acknowledgments
 
--[P3TERX](https://github.com/P3TERX/Actions-OpenWrt)
+-[P3TERX](https://github.com/P3TERX/Actions-OpenWrt)   
 -[id77](https://github.com/id77/OpenWrt-K2P-firmware)
