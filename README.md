@@ -1,7 +1,6 @@
 # Actions-OpenWrt
 
-注：本仓库纯属个人根据自己的设备配置使用，感谢[P3TERX大佬](https://github.com/P3TERX/Actions-OpenWrt)的仓库代码.</br>
-     直接FORK本仓库是不能自动编译并发布release的，请看下面使用方法。
+注：本仓库纯属个人根据自己的设备配置使用，直接FORK本仓库是不能自动编译并发布release的，请看下面使用方法。
 
 ## 使用方法
 
@@ -17,13 +16,5 @@
  
 ## Acknowledgments
 
-- [Microsoft](https://www.microsoft.com)
-- [Microsoft Azure](https://azure.microsoft.com)
-- [GitHub](https://github.com)
-- [GitHub Actions](https://github.com/features/actions)
-- [tmate](https://github.com/tmate-io/tmate)
-- [mxschmitt/action-tmate](https://github.com/mxschmitt/action-tmate)
-- [csexton/debugger-action](https://github.com/csexton/debugger-action)
-- [Cisco](https://www.cisco.com/)
-- [OpenWrt](https://github.com/openwrt/openwrt)
-- [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
+-[P3TERX](https://github.com/P3TERX/Actions-OpenWrt)
+-[id77](https://github.com/id77/OpenWrt-K2P-firmware)
