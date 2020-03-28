@@ -5,7 +5,7 @@
 ## 使用方法
 
 前面的自动编译以及个性化定制等修改，全部来源于P3TERX大佬的[代码](https://github.com/P3TERX/Actions-OpenWrt)及[教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)。</br>
-这里只说发布release的方法，部分代码借鉴[id77](https://github.com/id77/OpenWrt-K2P-firmware)：</br>
+这里只说发布release的方法，部分代码借鉴[id77](https://github.com/id77/OpenWrt-K2P-firmware)和[ncipollo](https://github.com/ncipollo/release-action)：</br>
  1、自动编译及自动发布你也可以使用本仓库模板，请点击上面的Use this template(使用此模板）来创建你自己的新仓库。</br>
  2、点击右上角你的头像-settings-Developer settings-Personal access tokens生成新的令牌，下面的选项全部选中，随便起名保存，同时复制令牌内容。</br>
  3、回到刚建的新仓库，settings-Secrets-Add a new secret(添加密匙），取名RELEASES_TOKEN,把刚才复制的令牌粘贴进去保存。</br>
@@ -16,8 +16,8 @@
  
 ## 致谢
 
--[P3TERX](https://github.com/P3TERX/Actions-OpenWrt)   
--[id77](https://github.com/id77/OpenWrt-K2P-firmware)
+- [P3TERX](https://github.com/P3TERX/Actions-OpenWrt)   
+- [id77](https://github.com/id77/OpenWrt-K2P-firmware)
 - [Microsoft](https://www.microsoft.com)
 - [Microsoft Azure](https://azure.microsoft.com)
 - [GitHub](https://github.com)
@@ -28,3 +28,4 @@
 - [Cisco](https://www.cisco.com/)
 - [OpenWrt](https://github.com/openwrt/openwrt)
 - [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
+- [ncipollo](https://github.com/ncipollo/release-action)
