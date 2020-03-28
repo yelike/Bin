@@ -1,6 +1,6 @@
 # Actions-OpenWrt
 
-注：本仓库纯属个人根据自己的设备配置使用，感谢P3TERX大佬的仓库代码.</br>
+注：本仓库纯属个人根据自己的设备配置使用，感谢[P3TERX大佬](https://github.com/P3TERX/Actions-OpenWrt)的仓库代码.</br>
      直接FORK本仓库是不能自动编译并发布release的，请看下面使用方法。
 
 ## 使用方法
