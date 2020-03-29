@@ -6,7 +6,7 @@ sed -i 's/OpenWrt/Bin AutoBuild $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/de
 #移除不用软件包    
 #rm -rf package/lean/luci-app-dockerman
 #添加额外软件包
-#git clone https://github.com/KFERMercer/luci-app-dockerman.git package/luci-app-dockerman
+#git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 svn co https://github.com/Lienol/openwrt-package/trunk/package/brook package/brook
 svn co https://github.com/Lienol/openwrt-package/trunk/package/chinadns-ng package/chinadns-ng
 svn co https://github.com/Lienol/openwrt-package/trunk/package/tcping package/tcping
