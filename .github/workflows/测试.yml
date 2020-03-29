@@ -1,5 +1,6 @@
 name: ce
 
+on:
   watch:
     types: started
 
