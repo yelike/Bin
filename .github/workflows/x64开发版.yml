@@ -120,7 +120,7 @@ jobs:
         body: |
           当前使用版本:（编译前的最后一次源码更新记录,源码来自https://github.com/coolsnowwolf/lede ）
           ${{ env.useVersionInfo }}
-        artifacts: ${{ env.FIRMWARE }}/*
+        artifacts: "${{ env.FIRMWARE }}/*,openwrt/bin"
 
     - name: WeChat notification
-      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}编译完成
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
