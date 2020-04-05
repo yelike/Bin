@@ -10,8 +10,8 @@ on:
 #      - 'n1开发版.config'
   schedule:
     - cron: 30 21 * * *
-#  watch:
-#    types: started
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -19,8 +19,9 @@ env:
   CONFIG_FILE: n1开发版.config
   DIY_SH: 开发版.sh
   SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
   FILE_NAME: n1开发版
 
@@ -87,11 +88,12 @@ jobs:
         echo -e "$(($(nproc) + 1)) thread compile"
         make -j$(($(nproc) + 1)) || make -j1 V=s
         echo "::set-output name=status::success"
+
     - name: Upload bin directory
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: OpenWrt_bin
+        name: bin
         path: openwrt/bin
 
     - name: Organize files
@@ -102,12 +104,13 @@ jobs:
         rm -rf packages
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@master
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      with:
-        name: n1开发版
-        path: ${{ env.FIRMWARE }}
+
+#    - name: Upload firmware directory
+#      uses: actions/upload-artifact@master
+#      if: steps.organize.outputs.status == 'success' && !cancelled()
+#      with:
+#        name: n1开发版
+#        path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
@@ -122,5 +125,11 @@ jobs:
           ${{ env.useVersionInfo }}
         artifacts: "${{ env.FIRMWARE }}/*,openwrt/bin"
 
+    - name: Upload firmware to cowtransfer # 奶牛快传
+      if: env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      run: |
+        curl -sL https://git.io/cowtransfer | sh
+        ./cowtransfer-uploader -b 2621440 -s -p 99 -t 3 --hash ${FIRMWARE}
+
     - name: WeChat notification
-      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}编译完成
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
