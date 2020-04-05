@@ -10,6 +10,7 @@ git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-ser
 git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 git clone https://github.com/bin20088/luci-app-koolddns.git package/luci-app-koolddns
 git clone https://github.com/bin20088/luci-theme-butongwifi.git package/luci-theme-butongwifi
+git clone https://github.com/Repobor/luci-app-koolproxyR.git package/luci-app-koolproxyR
 #添加神秘代码
 svn co https://github.com/bin20088/lede/trunk/files
 ./scripts/feeds update -a
