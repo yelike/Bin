@@ -21,6 +21,7 @@ env:
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
   FILE_NAME: x64稳定版
 
@@ -125,6 +126,12 @@ jobs:
           当前使用版本:（编译前的最后一次源码更新记录,源码来自https://github.com/coolsnowwolf/lede ）
           ${{ env.useVersionInfo }}
         artifacts: ${{ env.FIRMWARE }}/*
+
+    - name: Upload firmware to cowtransfer # 奶牛快传
+      if: env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      run: |
+        curl -sL https://git.io/cowtransfer | sh
+        ./cowtransfer-uploader -b 2621440 -s -p 99 -t 3 --hash ${FIRMWARE}
 
     - name: WeChat notification
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
