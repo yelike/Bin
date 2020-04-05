@@ -10,8 +10,8 @@ on:
 #      - 'n1稳定版.config'
   schedule:
     - cron: 30 22 * * *
-  watch:
-    types: started
+#  watch:
+#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -19,7 +19,7 @@ env:
   CONFIG_FILE: n1稳定版.config
   DIY_SH: n1稳定版.sh
   SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: true
+  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
@@ -105,12 +105,12 @@ jobs:
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
 
-#    - name: Upload firmware directory
-#      uses: actions/upload-artifact@master
-#      if: steps.organize.outputs.status == 'success' && !cancelled()
-#      with:
-#        name: n1稳定版
-#        path: ${{ env.FIRMWARE }}
+    - name: Upload firmware directory
+      uses: actions/upload-artifact@master
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        name: n1稳定版
+        path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
