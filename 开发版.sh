@@ -16,7 +16,7 @@ git clone https://github.com/bin20088/luci-theme-argon-mc.git package/luci-theme
 git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-theme-opentomcat
 git clone https://github.com/bin20088/luci-theme-butongwifi.git package/luci-theme-butongwifi
 git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git package/luci-theme-atmaterial
-git clone https://github.com/tzxiaozhen88/luci-app-koolproxyR.git package/luci-app-koolproxyR
+git clone https://github.com/Repobor/luci-app-koolproxyR.git package/luci-app-koolproxyR
 git clone https://github.com/bin20088/luci-app-koolddns.git package/luci-app-koolddns
 #添加神秘代码
 svn co https://github.com/bin20088/lede/trunk/files
