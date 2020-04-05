@@ -93,7 +93,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: bin
+        name: n1
         path: openwrt/bin
 
     - name: Organize files
