@@ -123,7 +123,7 @@ jobs:
         body: |
           当前使用版本:（编译前的最后一次源码更新记录,源码来自https://github.com/coolsnowwolf/lede ）
           ${{ env.useVersionInfo }}
-        artifacts: "${{ env.FIRMWARE }}/*,openwrt/bin"
+        artifacts: ${{ env.FIRMWARE }}/*
 
     - name: Upload firmware to cowtransfer # 奶牛快传
       if: env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
