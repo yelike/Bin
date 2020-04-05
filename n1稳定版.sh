@@ -11,5 +11,5 @@ sed -i 's/OpenWrt/Bin AutoBuild $(date "+%Y.%m.%d") @ OpenWrt/g' package/lean/de
 #git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 #添加神秘代码
 svn co https://github.com/bin20088/lede/trunk/files
-./scripts/feeds update -a
-./scripts/feeds install -a
+#./scripts/feeds update -a
+#./scripts/feeds install -a
