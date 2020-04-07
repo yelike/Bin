@@ -8,8 +8,8 @@ on:
 #      - master
 #    paths:
 #      - 'n1稳定版.config'
-#  schedule:
-#    - cron: 30 21 * * *
+  schedule:
+    - cron: 30 21 * * *
 #  watch:
 #    types: started
 
