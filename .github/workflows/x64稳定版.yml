@@ -10,6 +10,7 @@ on:
 #      - 'x64稳定版.config'
   schedule:
     - cron: 30 20 * * *
+    - cron: 30 7 * * *
 #  watch:
 #    types: started
 
