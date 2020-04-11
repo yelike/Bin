@@ -127,7 +127,7 @@ jobs:
           ${{ env.useVersionInfo }}
         artifacts: ${{ env.FIRMWARE }}/*
 
-    - name: Upload firmware to cowtransfer
+    - name: Upload firmware to cowtransfer #奶牛快传
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
