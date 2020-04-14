@@ -12,11 +12,14 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
+    
+    - name: set-env
+      run: echo "::set-env name=DATE::$(date "+%Y-%m-%d %H:%M:%S")"
 
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        name: 🚀 公告
+        name: ${{ env.DATE }} 🚀 公告 | 有重大更新时发布
         allowUpdates: true
         tag: 公告
         commit: master
