@@ -1,4 +1,5 @@
-# Actions-OpenWrt
+# Actions-OpenWrt  
+🚀 推荐本人[➦自用机场](https://moo.pet/Rxd4O),返佣是我持续编译的最大动力.
 
 注：本仓库纯属个人根据自己的设备配置使用，直接FORK本仓库是不能自动编译并发布release的，请看下面使用方法。
 
