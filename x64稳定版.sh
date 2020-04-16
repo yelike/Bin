@@ -12,8 +12,8 @@ git clone https://github.com/bin20088/luci-app-koolddns.git package/luci-app-koo
 git clone https://github.com/bin20088/luci-theme-butongwifi.git package/luci-theme-butongwifi
 git clone https://github.com/Repobor/luci-app-koolproxyR.git package/luci-app-koolproxyR
 svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus package/luci-app-ssr-plus
-./scripts/feeds update -a
-./scripts/feeds install -a
 #赋予koolddns权限
 chmod 0755 package/luci-app-koolddns/root/etc/init.d/koolddns
 chmod 0755 package/luci-app-koolddns/root/usr/share/koolddns/aliddns
+./scripts/feeds update -a
+./scripts/feeds install -a
