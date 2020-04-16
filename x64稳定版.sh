@@ -11,8 +11,6 @@ git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dock
 git clone https://github.com/bin20088/luci-app-koolddns.git package/luci-app-koolddns
 git clone https://github.com/bin20088/luci-theme-butongwifi.git package/luci-theme-butongwifi
 git clone https://github.com/Repobor/luci-app-koolproxyR.git package/luci-app-koolproxyR
-#添加神秘代码
-svn co https://github.com/bin20088/lede/trunk/files
 ./scripts/feeds update -a
 ./scripts/feeds install -a
 #赋予koolddns权限
