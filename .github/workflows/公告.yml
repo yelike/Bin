@@ -2,8 +2,8 @@ name: 公告
 
 on:
   repository_dispatch:
-  watch:
-    types: started
+#  watch:
+#    types: started
 #  schedule:
 #    - cron: 30 23 * * *
 
