@@ -20,7 +20,7 @@ env:
   CONFIG_FILE: x64开发版.config
   DIY_SH: 开发版.sh
   SSH_ACTIONS: false
-  UPLOAD_BIN_DIR: true
+  UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_WETRANSFER: false
   UPLOAD_COWTRANSFER: false
@@ -102,17 +102,19 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
+        tar -zcvf bin.tar.gz openwrt/bin
+        mv bin.tar.gz openwrt/bin/targets/*/*
         cd openwrt/bin/targets/*/*
         rm -rf packages
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
 
-  #  - name: Upload firmware directory
-  #    uses: actions/upload-artifact@master
-  #    if: steps.organize.outputs.status == 'success' && !cancelled()
-  #    with:
-  #      name: x64开发版
-  #      path: ${{ env.FIRMWARE }}
+    - name: Upload firmware directory
+      uses: actions/upload-artifact@master
+      if: steps.organize.outputs.status == 'success' && !cancelled()
+      with:
+        name: x64开发版
+        path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
