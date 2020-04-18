@@ -11,7 +11,7 @@ git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-ser
 git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
 git clone https://github.com/bin20088/luci-app-koolddns.git package/luci-app-koolddns
 git clone https://github.com/bin20088/luci-theme-butongwifi.git package/luci-theme-butongwifi
-git clone https://github.com/jefferymvp/luci-app-koolproxyR.git package/luci-app-koolproxyR
+git clone https://github.com/Repobor/luci-app-koolproxyR.git package/luci-app-koolproxyR
 svn co https://github.com/fw876/helloworld/trunk/luci-app-ssr-plus package/luci-app-ssr-plus
 chmod 0755 package/luci-app-koolddns/root/etc/init.d/koolddns
 chmod 0755 package/luci-app-koolddns/root/usr/share/koolddns/aliddns
