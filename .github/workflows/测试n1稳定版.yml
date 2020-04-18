@@ -1,4 +1,4 @@
-name: n1稳定版
+name: 测试n1稳定版
 
 on:
   repository_dispatch:
@@ -25,7 +25,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
-  FILE_NAME: n1稳定版
+  FILE_NAME: 测试n1稳定版
 
 jobs:
   build:
@@ -90,6 +90,7 @@ jobs:
         echo -e "$(($(nproc) + 1)) thread compile"
         make -j$(($(nproc) + 1)) || make -j1 V=s
         echo "::set-output name=status::success"
+
     - name: Upload bin directory
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
@@ -104,6 +105,9 @@ jobs:
         sudo ./mknop/make -d
         cp mknop/out/*.img ./openwrt/bin/targets/*/*
 
+    - name: WeChat notification
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}创建img成功
+
     - name: Organize files
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
@@ -116,15 +120,15 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: n1稳定版
+        name: 测试n1稳定版
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} 🚀 n1稳定版 | 自动编译
+        name: ${{ env.DATE }} 🚀 测试n1稳定版 | 自动编译
         allowUpdates: true
-        tag: n1稳定版
+        tag: 测试n1稳定版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
