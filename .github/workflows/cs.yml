@@ -45,7 +45,7 @@ jobs:
       run: |
         wget https://github.com/bin20088/Bin/releases/download/n1稳定版/openwrt-bcm27xx-bcm2710-rpi-3-rootfs.tar.gz
         git clone https://github.com/tuanqing/mknop.git
-        cp *.tar.gz ./mknop/openwrt/123.rootfs.tar.gz
+        sudo cp *.tar.gz ./mknop/openwrt/123-rootfs.tar.gz
         sudo ./mknop/make -d
         cd mknop/out
         echo "::set-env name=FIRMWARE::$PWD"
