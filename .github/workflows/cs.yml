@@ -46,8 +46,9 @@ jobs:
         wget https://github.com/bin20088/Bin/releases/download/n1稳定版/openwrt-bcm27xx-bcm2710-rpi-3-rootfs.tar.gz
         git clone https://github.com/tuanqing/mknop.git
         cp openwrt-bcm27xx-bcm2710-rpi-3-rootfs.tar.gz ./mknop/openwrt/
-        sudo ./mknop/make -d
-        cd mknop/out
+        cd mknop
+        sudo ./make -d
+        cd out
         echo "::set-env name=FIRMWARE::$PWD"
 
     - name: Upload firmware directory
