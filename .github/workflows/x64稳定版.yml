@@ -104,8 +104,8 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        tar -zcvf bin.tar.gz openwrt/bin/targets/*/*
-        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
+        tar -zcvf bin.tar.gz openwrt/bin/targets/x86/64
+        cp bin.tar.gz ./openwrt/bin/targets/x86/64/bin.tar.gz
         cd openwrt/bin/targets/*/*
         rm -rf packages
         bzip2 *
