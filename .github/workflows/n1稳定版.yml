@@ -19,7 +19,7 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: n1稳定版.config
   DIY_SH: n1稳定版.sh
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_WETRANSFER: false
