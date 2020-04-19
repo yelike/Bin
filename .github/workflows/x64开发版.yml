@@ -106,6 +106,7 @@ jobs:
         mv bin.tar.gz openwrt/bin/targets/*/*
         cd openwrt/bin/targets/*/*
         rm -rf packages
+        bzip2 *
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
 
