@@ -10,7 +10,7 @@ on:
 #    paths:
 #      - 'n1开发版.config'
   schedule:
-    - cron: 0 20 * * *
+    - cron: 0 19 * * *
   watch:
     types: started
 
@@ -109,9 +109,9 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        mv mknop/out/*.img openwrt/bin/targets/*/*/openwrt-on-n1.img
+        cp mknop/out/*.img ./openwrt/bin/targets/*/*/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
-        mv bin.tar.gz openwrt/bin/targets/*/*
+        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
         cd openwrt/bin/targets/*/*
         rm -rf packages
         bzip2 *
