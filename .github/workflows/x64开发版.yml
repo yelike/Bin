@@ -103,8 +103,8 @@ jobs:
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         tar -zcvf bin.tar.gz openwrt/bin
-        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
-        cd openwrt/bin/targets/*/*
+        cp bin.tar.gz ./openwrt/bin/targets/x86/64/bin.tar.gz
+        cd openwrt/bin/targets/x86/64
         rm -rf packages
         bzip2 *
         echo "::set-env name=FIRMWARE::$PWD"
