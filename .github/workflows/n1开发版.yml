@@ -11,8 +11,8 @@ on:
 #      - 'n1开发版.config'
   schedule:
     - cron: 0 19 * * *
-#  watch:
-#    types: started
+  watch:
+    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -109,9 +109,9 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cp mknop/out/*.img ./openwrt/bin/targets/*/*/openwrt-on-n1.img
+        sudo cp mknop/out/*.img ./openwrt/bin/targets/*/*/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
-        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
+        sudo cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
         cd openwrt/bin/targets/*/*
         rm -rf packages
         bzip2 *
