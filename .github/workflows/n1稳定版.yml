@@ -10,7 +10,7 @@ on:
 #    paths:
 #      - 'n1稳定版.config'
   schedule:
-    - cron: 0 21 * * *
+    - cron: 0 20 * * *
   watch:
     types: started
 
@@ -19,7 +19,7 @@ env:
   REPO_BRANCH: master
   CONFIG_FILE: n1稳定版.config
   DIY_SH: n1稳定版.sh
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_WETRANSFER: false
@@ -109,9 +109,9 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        mv mknop/out/*.img openwrt/bin/targets/*/*/openwrt-on-n1.img
-        tar -zcvf bin.tar.gz openwrt/bin
-        mv bin.tar.gz openwrt/bin/targets/*/*
+        cp mknop/out/*.img ./openwrt/bin/targets/*/*/openwrt-on-n1.img
+        tar -zcvf bin.tar.gz openwrt/bin/targets/*/*
+        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
         cd openwrt/bin/targets/*/*
         rm -rf packages
         bzip2 *
