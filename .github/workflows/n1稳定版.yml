@@ -98,7 +98,7 @@ jobs:
         cd mknop
         sudo ./make -d
         cd ..
-        mv mknop/out/*.img openwrt/bin/targets/*/*/openwrt-on-n1.img
+        sudo mv mknop/out/*.img openwrt/bin/targets/*/*/openwrt-on-n1.img
         cd openwrt/bin/targets/*/*
         gzip openwrt-on-n1.img
         rm -rf openwrt-on-n1.img
