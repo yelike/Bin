@@ -10,7 +10,7 @@ on:
 #    paths:
 #      - 'x64开发版.config'
   schedule:
-    - cron: 30 19 * * *
+    - cron: 0 19 * * *
   watch:
     types: started
 
@@ -103,7 +103,7 @@ jobs:
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         tar -zcvf bin.tar.gz openwrt/bin
-        mv bin.tar.gz openwrt/bin/targets/*/*
+        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
         cd openwrt/bin/targets/*/*
         rm -rf packages
         bzip2 *
