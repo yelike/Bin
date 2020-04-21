@@ -96,7 +96,7 @@ jobs:
         git clone https://github.com/tuanqing/mknop.git
         cp openwrt/bin/targets/*/*/*.tar.gz ./mknop/openwrt/n1-rootfs.tar.gz
         cd mknop
-        sudo ./make -d -s 650       
+        sudo ./make -d -s 650 -k 5.4.20
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
@@ -109,7 +109,7 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        sudo cp mknop/out/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
+        cp mknop/out/5.4.20/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz ./openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
         cd openwrt/bin/targets/*/*
