@@ -2,10 +2,10 @@ name: 公告
 
 on:
   repository_dispatch:
-  watch:
-    types: started
-  schedule:
-    - cron: 0 0 * * *
+#  watch:
+#    types: started
+#  schedule:
+#    - cron: 0 0 * * *
       
 env:
   FILE_NAME: 公告      
