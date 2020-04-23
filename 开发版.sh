@@ -7,10 +7,10 @@ sed -i 's/OpenWrt/Bin AutoBuild $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt/g' packag
 rm -rf package/lean/luci-app-dockerman
 #添加额外软件包
 git clone https://github.com/lisaac/luci-app-dockerman.git package/luci-app-dockerman
-svn co https://github.com/20088/openwrt-lienol/trunk/package/brook package/brook
-svn co https://github.com/20088/openwrt-lienol/trunk/package/chinadns-ng package/chinadns-ng
-svn co https://github.com/20088/openwrt-lienol/trunk/package/tcping package/tcping
-svn co https://github.com/20088/openwrt-lienol/trunk/lienol/luci-app-passwall package/luci-app-passwall
+svn co https://github.com/bin20088/openwrt-package/trunk/package/brook package/brook
+svn co https://github.com/bin20088/openwrt-package/trunk/package/chinadns-ng package/chinadns-ng
+svn co https://github.com/bin20088/openwrt-package/trunk/package/tcping package/tcping
+svn co https://github.com/bin20088/openwrt-package/trunk/lienol/luci-app-passwall package/luci-app-passwall
 git clone https://github.com/tty228/luci-app-serverchan.git package/luci-app-serverchan
 git clone https://github.com/bin20088/luci-theme-argon-mc.git package/luci-theme-argon-mc
 git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-theme-opentomcat
