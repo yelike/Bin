@@ -2,6 +2,7 @@ name: n1开发版
 
 on:
   repository_dispatch:
+    types: n1开发版
 #  release:
 #    types: published
 #  push:
