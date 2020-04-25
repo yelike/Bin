@@ -2,6 +2,7 @@ name: x64稳定版
 
 on:
   repository_dispatch:
+    types: x64稳定版
 #  release:
 #    types: published
 #  push:
