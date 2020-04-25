@@ -2,6 +2,7 @@ name: x64开发版
 
 on:
   repository_dispatch:
+    types: x64开发版
 #  release:
 #    types: published
 #  push:
