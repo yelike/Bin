@@ -2,6 +2,7 @@ name: n1稳定版
 
 on:
   repository_dispatch:
+    types: n1稳定版
 #  release:
 #    types: published
 #  push:
