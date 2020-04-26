@@ -2,7 +2,7 @@ name: n1开发版
 
 on:
   repository_dispatch:
-    types: kn1
+    types: n1开发版
 #  release:
 #    types: published
 #  push:
@@ -12,8 +12,8 @@ on:
 #      - 'n1开发版.config'
   schedule:
     - cron: 0 19 * * *
-  watch:
-    types: started
+#  watch:
+#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
