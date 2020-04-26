@@ -3,8 +3,8 @@ name: 公告
 on:
   repository_dispatch:
     types: 公告
-  watch:
-    types: started
+#  watch:
+#    types: started
 #  schedule:
 #    - cron: 0 0 * * *
       
