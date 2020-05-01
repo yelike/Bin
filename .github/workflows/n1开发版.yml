@@ -2,7 +2,7 @@ name: n1开发版
 
 on:
   repository_dispatch:
-    types: [n1开发版,ssh]
+    types: [n1开发版,sshn1开发版]
 #  release:
 #    types: published
 #  push:
@@ -74,7 +74,7 @@ jobs:
         ../$DIY_SH
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshn1开发版')
 
     - name: Download package
       id: package
