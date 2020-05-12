@@ -11,7 +11,7 @@ on:
 #    paths:
 #      - 'x64开发版.config'
   schedule:
-    - cron: 0 19 * * *
+    - cron: 35 18 * * *
 #  watch:
 #    types: started
 
