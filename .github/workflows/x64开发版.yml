@@ -115,7 +115,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: x64开发版
+        name: kx64
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
