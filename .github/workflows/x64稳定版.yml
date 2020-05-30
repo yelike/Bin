@@ -116,7 +116,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: x64稳定版
+        name: wx64
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
