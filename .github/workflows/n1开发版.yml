@@ -97,7 +97,7 @@ jobs:
         git clone https://github.com/tuanqing/mknop.git
         cp openwrt/bin/targets/*/*/*.tar.gz ./mknop/openwrt/n1-rootfs.tar.gz
         cd mknop
-        sudo ./make -d -s 650 -k 5.4.20
+        sudo ./make -d -s 650 -k 5.4.43
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
