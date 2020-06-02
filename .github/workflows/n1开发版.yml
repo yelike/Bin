@@ -110,7 +110,7 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cp mknop/out/5.4.20/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
+        cp mknop/out/5.4.43/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz ./openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
         cd openwrt/bin/targets/*/*
