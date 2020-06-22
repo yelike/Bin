@@ -11,7 +11,7 @@ on:
 #    paths:
 #      - 'n1开发版.config'
   schedule:
-    - cron: 0 19 * * *
+    - cron: 40 18 * * *
 #  watch:
 #    types: started
 
