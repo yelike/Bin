@@ -101,17 +101,16 @@ jobs:
         name: OpenWrt_bin
         path: openwrt/bin
 
-    - name: Organize files
-      id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+    - name: 清理
       run: |
         cd openwrt
         rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
-        cd ..
+    - name: 打包
+      run: |
         tar -zcvf openwrt.tar.gz openwrt
         rm -rf openwrt
         echo "::set-env name=FIRMWARE::$PWD"
-        echo "::set-output name=status::success"
+        echo "::set-output name=status::success" 
                
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
