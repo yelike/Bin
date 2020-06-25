@@ -159,7 +159,7 @@ jobs:
       run: |
         cd openwrt
         make clean
-        rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
+        rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl && rm -rf package/openwrt-packages
         cd ..
         tar -zcvf openwrt.tar.gz openwrt
     - name: 上传工程
