@@ -107,6 +107,7 @@ jobs:
         rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
         cd ..
         tar -zcvf openwrt.tar.gz openwrt
+        
                
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
