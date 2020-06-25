@@ -154,3 +154,25 @@ jobs:
 
     - name: WeChat notification
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
+      
+    - name: 打包工程
+      run: |
+        cd openwrt
+        make clean
+        rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
+        cd ..
+        tar -zcvf openwrt.tar.gz openwrt
+    - name: 上传工程
+      uses: ncipollo/release-action@v1
+      with:
+        name: ${{ env.DATE }} 纯净编译环境
+        allowUpdates: true
+        tag: 纯净编译环境
+        commit: master
+        token: ${{ secrets.RELEASES_TOKEN }}
+        body: |
+          ${{ env.useVersionInfo }}
+        artifacts: openwrt.tar.gz   
+        
+    - name: WeChat notification
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text= ${{ env.DATE }}编译环境上传成功
