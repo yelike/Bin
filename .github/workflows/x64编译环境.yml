@@ -101,7 +101,9 @@ jobs:
         name: OpenWrt_bin
         path: openwrt/bin
 
-    - name: 清理打包
+    - name: Organize files
+      id: organize
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         cd /home/runner/work/Bin/Bin/openwrt
         rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
@@ -111,12 +113,12 @@ jobs:
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success" 
                
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@master
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      with:
-        name: x64编译环境
-        path: ${{ env.FIRMWARE }}
+#    - name: Upload firmware directory
+#      uses: actions/upload-artifact@master
+#      if: steps.organize.outputs.status == 'success' && !cancelled()
+#      with:
+#        name: x64编译环境
+#        path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
