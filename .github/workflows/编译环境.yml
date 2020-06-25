@@ -101,9 +101,7 @@ jobs:
         name: OpenWrt_bin
         path: openwrt/bin
 
-    - name: Organize files
-      id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+    - name: 清理打包
       run: |
         cd openwrt
         rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
