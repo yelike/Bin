@@ -103,9 +103,9 @@ jobs:
 
     - name: 清理打包
       run: |
-        cd /workdir/openwrt
+        cd /workdir/openwrt/
         rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
-        cd /workdir
+        cd /workdir/
         7z a openwrt.7z openwrt
         rm -rf openwrt
         echo "::set-env name=FIRMWARE::$PWD"
