@@ -101,12 +101,11 @@ jobs:
         name: OpenWrt_bin
         path: openwrt/bin
 
-    - name: 清理
+    - name: 清理打包
       run: |
-        cd openwrt
+        cd /workdir/openwrt
         rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
-    - name: 打包
-      run: |
+        cd /workdir
         tar -zcvf openwrt.tar.gz openwrt
         rm -rf openwrt
         echo "::set-env name=FIRMWARE::$PWD"
@@ -116,7 +115,7 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: BYHJ
+        name: 编译环境
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
