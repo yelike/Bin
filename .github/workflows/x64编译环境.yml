@@ -1,15 +1,15 @@
-name: 编译环境
+name: x64编译环境
 
 on:
   repository_dispatch:
-    types: [编译环境,ssh编译环境]
+    types: [x64编译环境,sshx64编译环境]
 #  release:
 #    types: published
 #  push:
 #    branches:
 #      - master
 #    paths:
-#      - '编译环境.config'
+#      - 'x64编译环境.config'
 #  schedule:
 #    - cron: 00 20 * * *
 #  watch:
@@ -18,13 +18,13 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: 编译环境.config
-  DIY_SH: 编译环境.sh
+  CONFIG_FILE: x64编译环境.config
+  DIY_SH: x64编译环境.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   TZ: Asia/Shanghai
-  FILE_NAME: 编译环境
+  FILE_NAME: x64编译环境
 
 jobs:
   build:
@@ -71,7 +71,7 @@ jobs:
 #        $GITHUB_WORKSPACE/$DIY_SH
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh编译环境')
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshx64编译环境')
 
     - name: Download package
       id: package
@@ -115,15 +115,15 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: 编译环境
+        name: x64编译环境
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        name: ${{ env.DATE }} 编译环境 | 自动编译
+        name: ${{ env.DATE }} x64编译环境 | 自动编译
         allowUpdates: true
-        tag: 编译环境
+        tag: x64编译环境
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
