@@ -104,11 +104,10 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
-        cd /home/runner/work/Bin/Bin/openwrt
+        cd /workdir/openwrt
         rm -rf ./tmp && rm -rf .config && rm -rf bin && rm -rf dl
-        cd /home/runner/work/Bin/Bin
+        cd /workdir
         7z a openwrt.7z openwrt
-        sudo chmod 4755 openwrt.7z
         rm -rf openwrt
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success" 
@@ -131,7 +130,7 @@ jobs:
         body: |
           当前使用版本:【编译前的最后一次[➦主源码](https://github.com/coolsnowwolf/lede)更新记录】
           ${{ env.useVersionInfo }}
-        artifacts: ${{ env.FIRMWARE }}
+        artifacts: openwrt.7z
 
     - name: WeChat notification
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
