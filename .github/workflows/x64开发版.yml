@@ -16,7 +16,7 @@ on:
 #    types: started
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/bin000000/Bin/releases/download/x64编译环境2/openwrt.7z
   REPO_BRANCH: master
   CONFIG_FILE: x64开发版.config
   DIY_SH: 开发版.sh
@@ -55,11 +55,15 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
-        wget https://github.com/bin000000/Bin/releases/download/x64编译环境2/openwrt.7z
-	7z x openwrt.7z && rm -rf openwrt.7z
+        wget $REPO_URL
+        7z x openwrt.7z
+        rm -rf openwrt.7z
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-        cd openwrt && git reset --hard
-        git pull && ./scripts/feeds update -a && ./scripts/feeds install -a
+        cd openwrt
+        git reset --hard
+        git pull
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
         useVersionInfo=$(git show -s --date=short --format="Author: %an<br/>date: %cd<br/>commit: %s<br/>commit hash: %H")
         echo "::set-env name=useVersionInfo::$useVersionInfo"
         echo "::set-env name=DATE::$(date "+%Y-%m-%d %H:%M:%S")"
@@ -71,6 +75,7 @@ jobs:
         chmod +x $DIY_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_SH
+
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshx64开发版')
