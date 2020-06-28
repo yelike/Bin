@@ -9,7 +9,7 @@ on:
 #    branches:
 #      - master
 #    paths:
-#      - 'n1编译环境.config'
+#      - 'n1开发版.config'
   schedule:
     - cron: 00 13 * * 2,6
 #  watch:
@@ -18,7 +18,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: n1编译环境.config
+  CONFIG_FILE: n1开发版.config
   DIY_SH: n1编译环境.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
