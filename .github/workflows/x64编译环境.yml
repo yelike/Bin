@@ -9,7 +9,7 @@ on:
 #    branches:
 #      - master
 #    paths:
-#      - 'x64编译环境.config'
+#      - 'x64开发版.config'
   schedule:
     - cron: 00 13 * * 2,6
 #  watch:
@@ -18,7 +18,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  CONFIG_FILE: x64编译环境.config
+  CONFIG_FILE: x64开发版.config
   DIY_SH: x64编译环境.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
