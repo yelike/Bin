@@ -139,6 +139,7 @@ jobs:
         artifacts: ${{ env.FIRMWARE }}/*
 
   job2:
+    needs: job1
     runs-on: ubuntu-18.04
     steps: 
     - name: Checkout
