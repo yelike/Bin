@@ -16,7 +16,7 @@ on:
 #    types: started
 
 env:
-  REPO_URL: https://github.com/bin000000/Bin/releases/download/x64编译环境2/openwrt.7z
+  REPO_URL: https://github.com/bin20088/Bin/releases/download/x64编译环境/openwrt.7z
   REPO_BRANCH: master
   CONFIG_FILE: x64稳定版.config
   DIY_SH: 稳定版.sh
