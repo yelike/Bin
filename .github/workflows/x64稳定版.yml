@@ -2,7 +2,7 @@ name: x64稳定版
 
 on:
   repository_dispatch:
-    types: [x64稳定版,sshx64稳定版]
+    types: [wx64,sshwx64]
 #  release:
 #    types: published
 #  push:
@@ -76,7 +76,7 @@ jobs:
 
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshx64稳定版')
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshwx64')
 
     - name: Download package
       id: package
