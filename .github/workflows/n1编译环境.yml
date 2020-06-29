@@ -118,12 +118,12 @@ jobs:
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success" 
                
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@master
-      if: steps.organize.outputs.status == 'success' && !cancelled()
-      with:
-        name: n1BYHJ1
-        path: ${{ env.FIRMWARE }}
+#    - name: Upload firmware directory
+#      uses: actions/upload-artifact@master
+#      if: steps.organize.outputs.status == 'success' && !cancelled()
+#      with:
+#        name: n1BYHJ1
+#        path: ${{ env.FIRMWARE }}
 
     - name: Upload to release
       uses: ncipollo/release-action@v1
@@ -226,11 +226,11 @@ jobs:
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success" 
                
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@master
-      with:
-        name: n1BYHJ
-        path: ${{ env.FIRMWARE }}
+#    - name: Upload firmware directory
+#      uses: actions/upload-artifact@master
+#      with:
+#        name: n1BYHJ
+#        path: ${{ env.FIRMWARE }}
 
     - name: Upload to release
       uses: ncipollo/release-action@v1
