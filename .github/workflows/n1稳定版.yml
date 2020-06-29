@@ -137,7 +137,6 @@ jobs:
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
-      id: release
       uses: ncipollo/release-action@v1
       if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
@@ -150,7 +149,6 @@ jobs:
           当前使用版本:【编译前的最后一次[➦主源码](https://github.com/coolsnowwolf/lede)更新记录】
           ${{ env.useVersionInfo }}
         artifacts: ${{ env.FIRMWARE }}/*
-      run: echo "::set-outputs name=status::success"
 
     - name: Upload firmware to cowtransfer #奶牛快传
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
@@ -167,4 +165,5 @@ jobs:
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
 
     - name: WeChat notification
+      if: steps.organize.outputs.status == 'success' && !cancelled()
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
