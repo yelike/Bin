@@ -52,7 +52,7 @@ jobs:
         sudo -E apt-get -qq clean
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
-		
+
     - name: Clone source code # 克隆源代码
       working-directory: /workdir
       run: |
@@ -65,7 +65,7 @@ jobs:
         useVersionInfo=$(git show -s --date=short --format="Author: %an<br/>date: %cd<br/>commit: %s<br/>commit hash: %H")
         echo "::set-env name=useVersionInfo::$useVersionInfo"
         echo "::set-env name=DATE::$(date "+%Y-%m-%d %H:%M:%S")"
-		
+
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
@@ -73,7 +73,7 @@ jobs:
         chmod +x $DIY_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_SH
-		
+
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshwn1')
@@ -103,7 +103,7 @@ jobs:
         cp openwrt/bin/targets/*/*/*.tar.gz ./mknop/openwrt/n1-rootfs.tar.gz
         cd mknop
         sudo ./make -d -s 512 -k 5.4.43
-		echo "::set-outputs name=status::success"
+        echo "::set-outputs name=status::success"
 
     - name: Organize files
       id: organize
@@ -163,6 +163,6 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
-		
+
     - name: WeChat notification
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
