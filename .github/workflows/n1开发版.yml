@@ -97,7 +97,7 @@ jobs:
 
     - name: Build firmware
       id: build
-      if: steps.compile.outputs.status == 'success' && !cancelled()
+      if: steps.compile.outputs.status == 'success'
       run: |
         git clone https://github.com/tuanqing/mknop.git
         cp openwrt/bin/targets/*/*/*.tar.gz ./mknop/openwrt/n1-rootfs.tar.gz
@@ -107,7 +107,7 @@ jobs:
 
     - name: Organize files
       id: organize
-      if: steps.build.outputs.status == 'success' && !cancelled()
+      if: steps.build.outputs.status == 'success'
       run: |
         cp mknop/out/5.4.43/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
@@ -124,21 +124,21 @@ jobs:
 
     - name: Upload bin directory
       uses: actions/upload-artifact@master
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
         name: openwrt-kn1
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
-      if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success'
       with:
         name: kn1
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
-      if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success'
       with:
         name: ${{ env.DATE }} 🚀 n1开发版 | 自动编译
         allowUpdates: true
@@ -151,19 +151,19 @@ jobs:
         artifacts: ${{ env.FIRMWARE }}/*
 
     - name: Upload firmware to cowtransfer #奶牛快传
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
     - name: Upload firmware to WeTransfer
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true'
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
 
     - name: WeChat notification
-      if: steps.organize.outputs.status == 'success' && !cancelled()
+      if: steps.organize.outputs.status == 'success'
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
