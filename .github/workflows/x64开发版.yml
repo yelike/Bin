@@ -2,7 +2,7 @@ name: x64开发版
 
 on:
   repository_dispatch:
-    types: [wx64,sshwx64]
+    types: [kx64,sshkx64]
 #  release:
 #    types: published
 #  push:
