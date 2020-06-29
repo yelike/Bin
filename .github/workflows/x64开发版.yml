@@ -2,7 +2,7 @@ name: x64开发版
 
 on:
   repository_dispatch:
-    types: [x64开发版,sshx64开发版]
+    types: [kx64,sshkx64]
 #  release:
 #    types: published
 #  push:
@@ -11,18 +11,19 @@ on:
 #    paths:
 #      - 'x64开发版.config'
   schedule:
-    - cron: 35 18 * * *
+    - cron: 00 20 * * *
 #  watch:
 #    types: started
 
 env:
-  REPO_URL: https://github.com/bin20088/Bin/releases/download/x64编译环境/openwrt.7z
+  REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   CONFIG_FILE: x64开发版.config
   DIY_SH: 开发版.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
-  UPLOAD_FIRMWARE: true
+  UPLOAD_FIRMWARE: false
+  UPLOAD_RELEASE: true
   UPLOAD_WETRANSFER: false
   UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
@@ -51,23 +52,20 @@ jobs:
         sudo -E apt-get -qq clean
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+		
     - name: Clone source code # 克隆源代码
       working-directory: /workdir
       run: |
         df -hT $PWD
-        wget $REPO_URL
-        7z x openwrt.7z
-        rm -rf openwrt.7z
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd openwrt
-        git reset --hard
-        git pull
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         useVersionInfo=$(git show -s --date=short --format="Author: %an<br/>date: %cd<br/>commit: %s<br/>commit hash: %H")
         echo "::set-env name=useVersionInfo::$useVersionInfo"
         echo "::set-env name=DATE::$(date "+%Y-%m-%d %H:%M:%S")"
-
+		
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
@@ -75,10 +73,10 @@ jobs:
         chmod +x $DIY_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_SH
-
+		
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
-      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshx64开发版')
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshkx64')
 
     - name: Download package
       id: package
@@ -88,7 +86,7 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-        
+    
     - name: Compile the firmware
       id: compile
       run: |
@@ -105,12 +103,12 @@ jobs:
       uses: actions/upload-artifact@master
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
       with:
-        name: x64
+        name: OpenWrt_bin
         path: openwrt/bin
 
     - name: Organize files
       id: organize
-      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz ./openwrt/bin/targets/x86/64/bin.tar.gz
@@ -119,15 +117,17 @@ jobs:
         bzip2 *.img
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
+        
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
-      if: steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: kx64
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
+      if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: ${{ env.DATE }} 🚀 x64开发版 | 自动编译
         allowUpdates: true
