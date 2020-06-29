@@ -86,7 +86,7 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-    
+
     - name: Compile the firmware
       id: compile
       run: |
@@ -117,7 +117,7 @@ jobs:
         bzip2 *.img
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-outputss name=status::success"
-        
+
     - name: Check space usage
       if: (!cancelled())
       run: df -hT
@@ -128,7 +128,7 @@ jobs:
       with:
         name: openwrt-wn1
         path: ${{ env.FIRMWARE }}
-  
+
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputss.status == 'success' && !cancelled()
@@ -156,7 +156,7 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE} 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        
+
     - name: Upload firmware to WeTransfer
       if: steps.organize.outputss.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
       run: |
