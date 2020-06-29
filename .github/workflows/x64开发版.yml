@@ -2,7 +2,7 @@ name: x64开发版
 
 on:
   repository_dispatch:
-    types: [kx64,sshkx64]
+    types: [wx64,sshwx64]
 #  release:
 #    types: published
 #  push:
@@ -95,20 +95,9 @@ jobs:
         make -j$(($(nproc) + 1)) || make -j$(($(nproc) + 1)) || make -j1 V=s
         echo "::set-output name=status::success"
         
-    - name: Check space usage
-      if: (!cancelled())
-      run: df -hT
-
-    - name: Upload bin directory
-      uses: actions/upload-artifact@master
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      with:
-        name: OpenWrt_bin
-        path: openwrt/bin
-
     - name: Organize files
       id: organize
-      if: steps.compile.outputs.status == 'success' && !cancelled()
+      if: steps.compile.output.status == 'success' && !cancelled()
       run: |
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz ./openwrt/bin/targets/x86/64/bin.tar.gz
@@ -116,7 +105,18 @@ jobs:
         rm -rf packages
         bzip2 *.img
         echo "::set-env name=FIRMWARE::$PWD"
-        echo "::set-output name=status::success"
+        echo "::set-outputs name=status::success"
+        
+    - name: Check space usage
+      if: (!cancelled())
+      run: df -hT
+
+    - name: Upload bin directory
+      uses: actions/upload-artifact@master
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+      with:
+        name: OpenWrt-kx64
+        path: ${{ env.FIRMWARE }}
         
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
@@ -152,5 +152,6 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE} 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+
     - name: WeChat notification
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功-编译结束
