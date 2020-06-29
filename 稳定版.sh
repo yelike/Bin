@@ -2,8 +2,6 @@
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 #修改版本号
-rm -rf package/lean/default-settings
-svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/default-settings package/lean/default-settings
 sed -i 's/OpenWrt/Bin AutoBuild $(TZ=UTC-8 date "+%Y.%m.%d") @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
 
 #添加额外软件包
