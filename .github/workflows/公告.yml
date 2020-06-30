@@ -32,7 +32,7 @@ jobs:
         body: |
           🚀 推荐本人[➦自用不限量不限速机场](https://moo.pet/Rxd4O),🚀五一促销结束   
           🚀 本站下载需要黄金梯，如需国内下载请移步[➦我的网盘](http://256pd.top:9666).   
-          🚀 食用必看最新[➦6月22日公告及固件说明](https://github.com/bin20088/Bin/blob/master/.github/workflows/公告.md)。
+          🚀 食用必看最新[➦6月30日公告及固件说明](https://github.com/bin20088/Bin/blob/master/.github/workflows/公告.md)。
           
     - name: WeChat notification
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功
