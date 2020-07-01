@@ -104,10 +104,11 @@ jobs:
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         echo "${{ env.useVersionInfo }}" > openwrt/bin/targets/x86/64/${{ env.DATE }}更新说明.md
+        rm -rf openwrt/bin/targets/x86/64/packages
         tar -zcvf bin.tar.gz openwrt/bin/targets/x86/64
         cp bin.tar.gz ./openwrt/bin/targets/x86/64/bin.tar.gz
         cd openwrt/bin/targets/*/*
-        rm -rf packages ${{ env.DATE }}更新说明.md
+        rm -rf ${{ env.DATE }}更新说明.md
         bzip2 *.img
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
