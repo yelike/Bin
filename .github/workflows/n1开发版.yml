@@ -7,7 +7,7 @@ on:
 #    types: published
 #  push:
 #    branches:
-#      - master
+#      - main
 #    paths:
 #      - 'n1开发版.config'
   schedule:
@@ -39,7 +39,7 @@ jobs:
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}开始编译
       
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@main
 
     - name: Initialization environment
       env:
@@ -75,7 +75,7 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_SH
 
     - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
+      uses: P3TERX/debugger-action@main
       if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshkn1')
 
     - name: Download package
@@ -123,14 +123,14 @@ jobs:
         echo "::set-output name=status::success"
 
     - name: Upload bin directory
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: openwrt-kn1
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware directory
-      uses: actions/upload-artifact@master
+      uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: kn1
