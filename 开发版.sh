@@ -13,6 +13,7 @@ svn co https://github.com/Lienol/openwrt-package/trunk/package/trojan-go package
 svn co https://github.com/Lienol/openwrt-package/trunk/lienol/luci-app-passwall package/openwrt-packages/luci-app-passwall
 git clone https://github.com/tty228/luci-app-serverchan.git package/openwrt-packages/luci-app-serverchan
 git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/openwrt-packages/luci-app-jd-dailybonus
+git clone https://github.com/jerrykuku/node-request.git package/openwrt-packages/node-request
 git clone https://github.com/bin20088/luci-theme-argon-mc.git package/openwrt-packages/luci-theme-argon-mc
 git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/openwrt-packages/luci-theme-opentomcat
 git clone https://github.com/bin20088/luci-theme-butongwifi.git package/openwrt-packages/luci-theme-butongwifi
