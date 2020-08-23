@@ -6,12 +6,12 @@
 
 #添加额外软件包
 git clone https://github.com/lisaac/luci-app-dockerman.git package/openwrt-packages/luci-app-dockerman
-svn co https://github.com/Lienol/openwrt-package/trunk/package/brook package/openwrt-packages/brook
-svn co https://github.com/Lienol/openwrt-package/trunk/package/chinadns-ng package/openwrt-packages/chinadns-ng
-#svn co https://github.com/Lienol/openwrt-package/trunk/package/tcping package/openwrt-packages/tcping
-svn co https://github.com/Lienol/openwrt-package/trunk/package/trojan-go package/openwrt-packages/trojan-go
-svn co https://github.com/Lienol/openwrt-package/trunk/package/trojan-plus package/openwrt-packages/trojan-plus
-svn co https://github.com/Lienol/openwrt-package/trunk/lienol/luci-app-passwall package/openwrt-packages/luci-app-passwall
+svn co https://github.com/xiaorouji/openwrt-package/trunk/package/brook package/openwrt-packages/brook
+svn co https://github.com/xiaorouji/openwrt-package/trunk/package/chinadns-ng package/openwrt-packages/chinadns-ng
+#svn co https://github.com/xiaorouji/openwrt-package/trunk/package/tcping package/openwrt-packages/tcping
+svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-go package/openwrt-packages/trojan-go
+svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-plus package/openwrt-packages/trojan-plus
+svn co https://github.com/xiaorouji/openwrt-package/trunk/lienol/luci-app-passwall package/openwrt-packages/luci-app-passwall
 git clone https://github.com/tty228/luci-app-serverchan.git package/openwrt-packages/luci-app-serverchan
 git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git package/openwrt-packages/luci-app-jd-dailybonus
 git clone https://github.com/jerrykuku/node-request.git package/openwrt-packages/node-request
