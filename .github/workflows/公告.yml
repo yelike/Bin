@@ -35,4 +35,4 @@ jobs:
           🚀 食用必看最新[➦6月30日公告及固件说明](https://github.com/bin20088/Bin/blob/master/.github/workflows/公告.md)。
           
     - name: WeChat notification
-      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功
+      run: curl https://sctapi.ftqq.com/${{ secrets.ServerChan }}.send?title=${{ env.FILE_NAME }}发布成功
