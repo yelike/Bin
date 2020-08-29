@@ -115,10 +115,10 @@ jobs:
       id: organize
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
-        cp mknop/out/5.4.50/*.img ./openwrt/bin/targets/*/*/openwrt-on-n1.img
-        rm -rf openwrt/bin/targets/*/*/packages
-        tar -zcvf bin.tar.gz openwrt/bin/targets/*/*
-        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
+        cp mknop/out/5.4.50/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
+        rm -rf openwrt/bin/targets/bcm27xx/bcm2710/packages
+        tar -zcvf bin.tar.gz openwrt/bin/targets/bcm27xx/bcm2710
+        cp bin.tar.gz ./openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
         cd openwrt/bin/targets/*/*
         bzip2 *.img
         echo "::set-env name=FIRMWARE::$PWD"
