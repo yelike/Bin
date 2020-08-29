@@ -115,9 +115,9 @@ jobs:
       id: organize
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
-        cp mknop/out/5.4.50/*.img ./openwrt/bin/targets/*/*/openwrt-on-n1.img
+        cp mknop/out/5.4.50/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
-        cp bin.tar.gz ./openwrt/bin/targets/*/*/bin.tar.gz
+        cp bin.tar.gz ./openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
         cd openwrt/bin/targets/*/*
         rm -rf packages
         bzip2 *.img
