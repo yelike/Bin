@@ -17,7 +17,7 @@ on:
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/openwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: lede-17.01
   CONFIG_FILE: x64稳定版.config
   DIY_SH: 稳定版.sh
   SSH_ACTIONS: false
