@@ -16,7 +16,7 @@ on:
 #    types: started
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_URL: https://github.com/coolsnowwolf/openwrt
   REPO_BRANCH: master
   CONFIG_FILE: x64稳定版.config
   DIY_SH: 稳定版.sh
