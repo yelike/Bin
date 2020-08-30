@@ -80,6 +80,7 @@ jobs:
         sed -i 's|openwrt.proxy.ustclug.org|256pd.top:9666/稳定版/x64|g' package/lean/default-settings/files/zzz-default-settings
         sed -i '/downloads/ { s/s\//s|/g; }' package/lean/default-settings/files/zzz-default-settings
         sed -i '/downloads/ { s/org\//org|/g; }' package/lean/default-settings/files/zzz-default-settings
+        sed -i '/downloads/ { s/x64\//x64|/g; }' package/lean/default-settings/files/zzz-default-settings
         sed -i 's/http:/snapshots/' package/lean/default-settings/files/zzz-default-settings
         sed -i 's/https:/bin/g' package/lean/default-settings/files/zzz-default-settings
 
