@@ -9,17 +9,17 @@ on:
 #    branches:
 #      - main
 #    paths:
-#      - 'n1开发版.config'
+#      - 'n1.config'
   schedule:
     - cron: 00 18 * * *
 #  watch:
 #    types: started
 
 env:
-  REPO_URL: https://github.com/coolsnowwolf/openwrt
-  REPO_BRANCH: lede-17.01
-  CONFIG_FILE: n1开发版.config
-  DIY_SH: 开发版.sh
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+  CONFIG_FILE: n1.config
+  DIY_SH: bin.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: false
@@ -64,7 +64,7 @@ jobs:
         ./scripts/feeds install -a
         useVersionInfo=$(git show -s --date=short --format="编译前的最后一次[➦主源码](https://github.com/coolsnowwolf/lede)更新记录:<br/>更新人: %an<br/>更新时间: %cd<br/>更新内容: %s<br/>哈希值: %H")
         echo "::set-env name=useVersionInfo::$useVersionInfo"
-        echo "::set-env name=DATE::$(date "+%Y-%m-%d·%H:%M:%S")"
+        echo "::set-env name=DATE::$(date "+%Y-%m-%d-%H:%M:%S")"
         echo "::set-env name=DATE1::$(date "+%Y.%m.%d")"
 
     - name: Load custom configuration
@@ -75,6 +75,13 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_SH
         sed -i 's/OpenWrt/Bin AutoBuild ${{ env.DATE1 }} @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
+        sed -i '/openwrt_luci/ { s/sed/#sed/g; }' package/lean/default-settings/files/zzz-default-settings
+        sed -i 's|openwrt.proxy.ustclug.org|256pd.top:9666/开发版/n1|g' package/lean/default-settings/files/zzz-default-settings
+        sed -i '/downloads/ { s/s\//s|/g; }' package/lean/default-settings/files/zzz-default-settings
+        sed -i '/downloads/ { s/org\//org|/g; }' package/lean/default-settings/files/zzz-default-settings
+        sed -i '/downloads/ { s/n1\//n1|/g; }' package/lean/default-settings/files/zzz-default-settings
+        sed -i 's/http:/snapshots/' package/lean/default-settings/files/zzz-default-settings
+        sed -i 's/https:/bin/g' package/lean/default-settings/files/zzz-default-settings
 
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@main
@@ -115,6 +122,7 @@ jobs:
       id: organize
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
+        echo "${{ env.useVersionInfo }}" > openwrt/bin/${{ env.DATE }}更新说明.md
         cp mknop/out/5.4.50/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz ./openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
