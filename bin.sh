@@ -21,11 +21,15 @@ git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/openwrt
 git clone https://github.com/bin20088/luci-theme-butongwifi.git package/openwrt-packages/luci-theme-butongwifi
 git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git package/openwrt-packages/luci-theme-atmaterial
 git clone https://github.com/cnzd/luci-app-koolproxyR.git package/openwrt-packages/luci-app-koolproxyR
-svn co https://github.com/siropboy/mypackages/trunk/luci-app-koolddns package/openwrt-packages/luci-app-koolddns
+git clone https://github.com/bin20088/luci-app-koolddns.git package/openwrt-packages/luci-app-koolddns
 git clone https://github.com/fw876/helloworld.git package/openwrt-packages/helloworld
 git clone https://github.com/tuanqing/install-program package/openwrt-packages/install-program
 svn co https://github.com/0saga0/OpenClash/trunk/luci-app-openclash package/openwrt-packages/luci-app-openclash
 svn co https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom/trunk/luci-theme-infinityfreedom package/openwrt-packages/luci-theme-infinityfreedom
+
+#赋予koolddns权限
+chmod 0755 package/openwrt-packages/luci-app-koolddns/root/etc/init.d/koolddns
+chmod 0755 package/openwrt-packages/luci-app-koolddns/root/usr/share/koolddns/aliddns
 
 ./scripts/feeds update -a
 ./scripts/feeds install -a
