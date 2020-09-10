@@ -30,6 +30,7 @@ git clone https://github.com/tuanqing/install-program package/openwrt-packages/i
 svn co https://github.com/0saga0/OpenClash/trunk/luci-app-openclash package/openwrt-packages/luci-app-openclash
 svn co https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom/trunk/luci-theme-infinityfreedom package/openwrt-packages/luci-theme-infinityfreedom
 
+sed -i 's/OpenWrt/Bin AutoBuild ${{ env.DATE1 }} @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
 sed -i 's|PKG_SOURCE_URL:=http://releases-cdn.verysync.com/releases/$(PKG_VERSION)|PKG_SOURCE_URL:=http://dl.verysync.net/$(PKG_VERSION)|g' package/lean/verysync/Makefile
 
 #赋予koolddns权限
