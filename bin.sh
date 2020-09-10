@@ -11,6 +11,8 @@ svn co https://github.com/xiaorouji/openwrt-package/trunk/package/chinadns-ng pa
 svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-go package/openwrt-packages/trojan-go
 svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-plus package/openwrt-packages/trojan-plus
 svn co https://github.com/xiaorouji/openwrt-package/trunk/package/ssocks package/openwrt-packages/ssocks
+svn co https://github.com/coolsnowwolf/packages/trunk/libs/nss package/openwrt-packages/nss
+svn co https://github.com/coolsnowwolf/packages/trunk/libs/nspr package/openwrt-packages/nspr
 svn co https://github.com/xiaorouji/openwrt-package/trunk/lienol/luci-app-passwall package/openwrt-packages/luci-app-passwall
 svn co https://github.com/siropboy/mypackages/trunk/luci-app-autopoweroff package/openwrt-packages/luci-app-autopoweroff
 svn co https://github.com/siropboy/mypackages/trunk/luci-app-control-timewol package/openwrt-packages/luci-app-control-timewol
