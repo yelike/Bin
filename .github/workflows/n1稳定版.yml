@@ -137,7 +137,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: openwrt-wn1
-        path: /openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
+        path: openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
