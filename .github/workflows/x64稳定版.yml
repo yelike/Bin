@@ -126,7 +126,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: OpenWrt-wx64
-        path: /openwrt/bin/targets/x86/64/bin.tar.gz
+        path: openwrt/bin/targets/x86/64/bin.tar.gz
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
