@@ -75,6 +75,7 @@ jobs:
         chmod +x $DIY_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_SH
+        sed -i 's/OpenWrt/Bin AutoBuild ${{ env.DATE1 }} @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
         sed -i '/openwrt_luci/ { s/sed/#sed/g; }' package/lean/default-settings/files/zzz-default-settings
         sed -i 's|openwrt.proxy.ustclug.org|256pd.top:9666/稳定版/n1|g' package/lean/default-settings/files/zzz-default-settings
         sed -i '/downloads/ { s/s\//s|/g; }' package/lean/default-settings/files/zzz-default-settings
