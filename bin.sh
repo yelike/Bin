@@ -3,8 +3,6 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 # 修改默认主题
 #sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
-#修改版本号
-#sed -i 's/OpenWrt/Bin AutoBuild ${{ env.DATE1 }} @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
 #修改主机名
 sed -i 's/OpenWrt/Bin-Lean/g' package/base-files/files/bin/config_generate
 
@@ -15,8 +13,6 @@ svn co https://github.com/xiaorouji/openwrt-package/trunk/package/chinadns-ng pa
 svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-go package/openwrt-packages/trojan-go
 svn co https://github.com/xiaorouji/openwrt-package/trunk/package/trojan-plus package/openwrt-packages/trojan-plus
 svn co https://github.com/xiaorouji/openwrt-package/trunk/package/ssocks package/openwrt-packages/ssocks
-svn co https://github.com/coolsnowwolf/packages/trunk/libs/nss package/openwrt-packages/nss
-svn co https://github.com/coolsnowwolf/packages/trunk/libs/nspr package/openwrt-packages/nspr
 svn co https://github.com/xiaorouji/openwrt-package/trunk/lienol/luci-app-passwall package/openwrt-packages/luci-app-passwall
 svn co https://github.com/siropboy/mypackages/trunk/luci-app-autopoweroff package/openwrt-packages/luci-app-autopoweroff
 svn co https://github.com/siropboy/mypackages/trunk/luci-app-control-timewol package/openwrt-packages/luci-app-control-timewol
