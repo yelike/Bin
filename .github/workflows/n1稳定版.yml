@@ -122,7 +122,6 @@ jobs:
       id: organize
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
-        echo "${{ env.useVersionInfo }}" > openwrt/bin/${{ env.DATE }}更新说明.md
         cp mknop/out/*/*.img ./openwrt/bin/targets/bcm27xx/bcm2710/openwrt-on-n1.img
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz ./openwrt/bin/targets/bcm27xx/bcm2710/bin.tar.gz
