@@ -27,7 +27,6 @@ git clone https://github.com/bin20088/luci-app-koolddns.git package/openwrt-pack
 git clone https://github.com/tuanqing/install-program package/openwrt-packages/install-program
 svn co https://github.com/0saga0/OpenClash/trunk/luci-app-openclash package/openwrt-packages/luci-app-openclash
 svn co https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom/trunk/luci-theme-infinityfreedom package/openwrt-packages/luci-theme-infinityfreedom
-sed -i 's/e5d6603454622e1f466c4c20061992046124fc7c/f289d8d85ab0851851a6e3c101226e77bed0052fd60f9185df8852b601e657f8/g' package/lean/v2ray/Makefile
 
 #赋予koolddns权限
 chmod 0755 package/openwrt-packages/luci-app-koolddns/root/etc/init.d/koolddns
