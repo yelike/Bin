@@ -9,7 +9,7 @@ on:
 #    branches:
 #      - main
 #    paths:
-#      - 'n1.config'
+#      - 'armv8.config'
   schedule:
     - cron: 00 17 * * *
 #  watch:
@@ -18,7 +18,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/openwrt
   REPO_BRANCH: lede-17.01
-  CONFIG_FILE: n1.config
+  CONFIG_FILE: armv8.config
   DIY_SH: bin.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
@@ -113,7 +113,7 @@ jobs:
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         git clone https://github.com/tuanqing/mknop.git
-        cp openwrt/bin/targets/*/*/*.tar.gz mknop/openwrt/n1-rootfs.tar.gz
+        cp openwrt/bin/targets/*/*/*.tar.gz mknop/openwrt/armv8-rootfs.tar.gz
         cd mknop
         sudo ./gen_openwrt -d -s 512 -k latest -m all
         echo "::set-output name=status::success"
