@@ -1,8 +1,8 @@
-name: n1稳定版
+name: armv8稳定版
 
 on:
   repository_dispatch:
-    types: [wn1,sshwn1]
+    types: [warmv8,sshwarmv8]
 #  release:
 #    types: published
 #  push:
@@ -27,7 +27,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_COWTRANSFER: false
   TZ: Asia/Shanghai
-  FILE_NAME: n1稳定版
+  FILE_NAME: armv8稳定版
 
 jobs:
   build:
@@ -76,16 +76,16 @@ jobs:
         $GITHUB_WORKSPACE/$DIY_SH
         sed -i 's/OpenWrt/Bin AutoBuild ${{ env.DATE1 }} @ OpenWrt/g' package/lean/default-settings/files/zzz-default-settings
         sed -i '/openwrt_luci/ { s/sed/#sed/g; }' package/lean/default-settings/files/zzz-default-settings
-        sed -i 's|openwrt.proxy.ustclug.org|256pd.top:9666/稳定版/n1|g' package/lean/default-settings/files/zzz-default-settings
+        sed -i 's|openwrt.proxy.ustclug.org|256pd.top:9666/稳定版/armv8|g' package/lean/default-settings/files/zzz-default-settings
         sed -i '/downloads/ { s/s\//s|/g; }' package/lean/default-settings/files/zzz-default-settings
         sed -i '/downloads/ { s/org\//org|/g; }' package/lean/default-settings/files/zzz-default-settings
-        sed -i '/downloads/ { s/n1\//n1|/g; }' package/lean/default-settings/files/zzz-default-settings
+        sed -i '/downloads/ { s/armv8\//armv8|/g; }' package/lean/default-settings/files/zzz-default-settings
         sed -i 's/http:/snapshots/' package/lean/default-settings/files/zzz-default-settings
         sed -i 's/https:/bin/g' package/lean/default-settings/files/zzz-default-settings
 
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@main
-      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshwn1')
+      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshwarmv8')
 
     - name: Download package
       id: package
@@ -137,23 +137,23 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
-        name: openwrt-wn1
+        name: warmv8
         path: openwrt/bin/targets/*/*/bin.tar.gz
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@main
       if: env.UPLOAD_FIRMWARE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: wn1
+        name: warmv8
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
       uses: ncipollo/release-action@v1
       if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: ${{ env.DATE }} 🚀 n1稳定版 | 自动编译
+        name: ${{ env.DATE }} 🚀 armv8稳定版 | 自动编译
         allowUpdates: true
-        tag: n1稳定版
+        tag: armv8稳定版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
