@@ -116,7 +116,7 @@ jobs:
         git clone https://github.com/tuanqing/mknop.git
         cp openwrt/bin/targets/*/*/*.tar.gz mknop/openwrt/armv8-rootfs.tar.gz
         cd mknop
-        sudo ./gen_openwrt -d -s 512 -k latest -m all
+        sudo ./gen_openwrt -d
         echo "::set-output name=status::success"
 
     - name: Organize files
@@ -124,10 +124,10 @@ jobs:
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
         echo "${{ env.useVersionInfo }}" > openwrt/bin/${{ env.DATE }}更新说明.md
-        cp mknop/out/phicomm-n1/*.img openwrt/bin/targets/*/*/phicomm-n1.img
-        cp mknop/out/vplus/*.img openwrt/bin/targets/*/*/vplus.img
+        cp mknop/out/phicomm-n1/*.img openwrt/bin/targets/*/*
+        cp mknop/out/vplus/*.img openwrt/bin/targets/*/*
         tar -zcvf bin.tar.gz openwrt/bin
-        cp bin.tar.gz openwrt/bin/targets/*/*/bin.tar.gz
+        cp bin.tar.gz openwrt/bin/targets/*/*
         cd openwrt/bin/targets/*/*
         rm -rf packages
         bzip2 *.img
