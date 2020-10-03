@@ -9,7 +9,7 @@ on:
 #    branches:
 #      - main
 #    paths:
-#      - 'n1.config'
+#      - 'armv8.config'
   schedule:
     - cron: 00 17 * * *
 #  watch:
