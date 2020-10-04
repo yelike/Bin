@@ -30,9 +30,9 @@ jobs:
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
         body: |
-          🚀 推荐本人[➦自用不限量不限速机场](https://moo.pet/Rxd4O),🚀五一促销结束   
-          🚀 本站下载需要黄金梯，如需国内下载请移步[➦我的网盘](http://256pd.top:9666).   
-          🚀 食用必看最新[➦6月30日公告及固件说明](https://github.com/bin20088/Bin/blob/master/.github/workflows/公告.md)。
+            🚀 推荐本人[➦自用稳定机场](https://moo.pet/Rxd4O),🚀折扣码到期，期待下次再有。      
+            🚀目前已基本稳定，开始继续正常发布。 [➦我的网盘](http://256pd.top:9666)继续保留R20.6.18版本供机油备用，也同时每天更新最新固件，如需单独下载依赖及ipk，也可以在 [➦我的网盘](http://256pd.top:9666)里找到   
+            🚀固件说明及公告请到[➦10月3日公告页](https://github.com/bin20088/Bin/blob/master/.github/workflows/公告.md)查看。 各位务必看看10月3日的公告，以免出错。   【顺利测试成功，客官们尽情享用吧】
           
     - name: WeChat notification
       run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}发布成功
