@@ -124,7 +124,11 @@ jobs:
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
         echo "${{ env.useVersionInfo }}" > openwrt/bin/${{ env.DATE }}更新说明.md
-        cp mknop/out/*/*.img openwrt/bin/targets/*/*
+        cp mknop/out/phicomm-n1/*.img openwrt/bin/targets/armvirt/64/phicomm-n1.img
+        cp mknop/out/vplus/*.img openwrt/bin/targets/armvirt/64/vplus.img
+        cp mknop/out/beikeyun/*.img openwrt/bin/targets/armvirt/64/beikeyun.img
+        cp mknop/out/l1pro/*.img openwrt/bin/targets/armvirt/64/l1pro.img
+        cp mknop/out/s905x3/*.img openwrt/bin/targets/armvirt/64/s905x3.img
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz openwrt/bin/targets/*/*
         cd openwrt/bin/targets/*/*
