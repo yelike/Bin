@@ -9,7 +9,7 @@ on:
 #    branches:
 #      - main
 #    paths:
-#      - 'armv8.config'
+#      - 'warmv8.config'
   schedule:
     - cron: 00 17 * * *
 #  watch:
@@ -18,7 +18,7 @@ on:
 env:
   REPO_URL: https://github.com/coolsnowwolf/openwrt
   REPO_BRANCH: lede-17.01
-  CONFIG_FILE: armv8.config
+  CONFIG_FILE: warmv8.config
   DIY_SH: bin.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
