@@ -33,6 +33,7 @@ jobs:
         sudo chown $USER:$GROUPS /workdir
         
     - name: Build firmware
+      id: build
       run: |
         cd /opt
         sudo wget http://256pd.top:9666/mk_openwrt_src_20201008.tar.gz
@@ -50,7 +51,7 @@ jobs:
       uses: actions/upload-artifact@main
       with:
         name: img
-        path: ${{ steps.organize.outputs.FIRMWARE }}
+        path: ${{ steps.build.outputs.FIRMWARE }}
         
         
     - name: WeChat notification
