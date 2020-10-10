@@ -36,12 +36,10 @@ jobs:
       id: build
       run: |
         cd /opt
-        sudo wget -b http://256pd.top:9666/*.tar.gz
+        sudo wget -b -r -np -nd -A.tar.gz -A.img http://256pd.top:9666/.imgs/
         sudo tar xvzf *.tar.gz
-        cd /opt
         sudo mkdir imgs
-        cd /opt/openwrt/imgs
-        sudo wget -b -r -A.img http://256pd.top:9666/
+        sudo mv *.img imgs
         cd /opt/openwrt
         sudo wget -b https://github.com/bin20088/Bin/releases/download/armv8开发版/openwrt-armvirt-64-default-rootfs.tar.gz
         sudo ./mk_s905x3_opimg.sh
