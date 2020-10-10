@@ -42,7 +42,7 @@ jobs:
         sudo mkdir imgs
         wget -O /opt/imgs/Armbian_20.09_Aml-s9xxx_buster_5.4.69-flippy-45+o.img http://256pd.top:9666/Armbian_20.09_Aml-s9xxx_buster_5.4.69-flippy-45+o.img
         cd /opt/openwrt
-        wget http://256pd.top:9666/openwrt-armvirt-64-default-rootfs.tar.gz
+        sudo wget http://256pd.top:9666/openwrt-armvirt-64-default-rootfs.tar.gz
         sudo ./mk_s905x3_opimg.sh
         cd /opt/openwrt/tmp
         echo "::set-output name=FIRMWARE::$PWD"
