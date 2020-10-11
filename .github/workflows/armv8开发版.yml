@@ -129,7 +129,8 @@ jobs:
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
         echo "${{ steps.source.outputs.useVersionInfo }}" > openwrt/bin/${{ steps.source.outputs.DATE }}更新说明.md
-        sudo cp /opt/openwrt/tmp/*.img /openwrt/bin/targets/armvirt/64
+        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin/targets/armvirt/64
+        cd /workdir/
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz openwrt/bin/targets/*/*
         cd openwrt/bin/targets/*/*
