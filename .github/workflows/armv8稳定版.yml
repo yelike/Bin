@@ -2,25 +2,20 @@ name: armv8稳定版
 
 on:
   repository_dispatch:
-    types: [warmv8,sshwarmv8]
-#  release:
-#    types: published
-#  push:
-#    branches:
-#      - main
-#    paths:
-#      - 'warmv8.config'
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
   schedule:
     - cron: 00 17 * * *
-#  watch:
-#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/openwrt
   REPO_BRANCH: lede-17.01
   CONFIG_FILE: warmv8.config
   DIY_SH: bin.sh
-  SSH_ACTIONS: false
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: false
   UPLOAD_RELEASE: true
@@ -32,7 +27,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-18.04
-    if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
     - name: WeChat notification
@@ -81,8 +75,11 @@ jobs:
         sed -i 's#https://mirrors.cloud.tencent.com/lede#http://256pd.top:9666/稳定版/armv8/bin#g' package/lean/default-settings/files/zzz-default-settings
 
     - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@main
-      if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'sshwarmv8')
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'sshwarmv8')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
     - name: Download package
       id: package
