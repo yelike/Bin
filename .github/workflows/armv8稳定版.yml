@@ -2,6 +2,7 @@ name: armv8稳定版
 
 on:
   repository_dispatch:
+    types: [karmv8,sshkarmv8]
   workflow_dispatch:
     inputs:
       ssh:
