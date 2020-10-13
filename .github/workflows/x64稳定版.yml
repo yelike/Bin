@@ -1,7 +1,8 @@
 name: x64稳定版
 
 on:
-#  repository_dispatch:
+  repository_dispatch:
+    types: [wx64,sshwx64]
   workflow_dispatch:
     inputs:
       ssh:
