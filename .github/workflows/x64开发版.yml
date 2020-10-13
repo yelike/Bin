@@ -1,7 +1,8 @@
 name: x64开发版
 
 on:
-#  repository_dispatch:
+  repository_dispatch:
+    types: [kx64,sshkx64]
   workflow_dispatch:
     inputs:
       ssh:
