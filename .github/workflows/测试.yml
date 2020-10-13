@@ -1,10 +1,13 @@
 name: 测试
 
 on:
-  repository_dispatch:
-    types: 测试
-#  watch:
-#    types: started
+#  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: '测试'
+        required: false
+        default: 'false'
 #  schedule:
 #    - cron: 0 0 * * *
       
