@@ -1,7 +1,8 @@
 name: 测试
 
 on:
-#  repository_dispatch:
+  repository_dispatch:
+    types: [测试]
   workflow_dispatch:
     inputs:
       ssh:
