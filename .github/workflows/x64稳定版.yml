@@ -1,11 +1,11 @@
 name: x64稳定版
 
 on:
-  repository_dispatch:
+#  repository_dispatch:
   workflow_dispatch:
     inputs:
       ssh:
-        description: 'SSH connection to Actions'
+        description: 'wx64'
         required: false
         default: 'false'
   schedule:
