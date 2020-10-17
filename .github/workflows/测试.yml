@@ -36,12 +36,33 @@ jobs:
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
         
+    - name: Clone source code # 克隆源代码
+      id: source
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        cd openwrt
+        sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
+        ./scripts/feeds update -a
+        ./scripts/feeds install -a
+
+    - name: SSH connection to Actions
+      uses: P3TERX/ssh2actions@v1.0.0
+      if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, '测试')
+      env:
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+
     - name: Build firmware
       id: build
       run: |
         cd /opt
-        sudo wget -r -np -nd -A.tar.gz -A.img http://256pd.top:9666/.imgs/
-        sudo tar xvzf *.tar.gz
+        sudo wget https://github.com/bin20088/Bin/releases/download/公告/img.tar
+        sudo tar xvf *.tar
+        sudo xz -d *.img.xz
+        sudo tar zxvf *.tar.gz
         sudo mkdir imgs
         sudo mv *.img imgs
         cd /opt/openwrt
@@ -52,7 +73,7 @@ jobs:
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
         cd /opt/openwrt/tmp
-        bzip2 *.img
+        tar zcvf *.img
         echo "::set-output name=FIRMWARE::$PWD"
         
     - name: Upload bin directory
