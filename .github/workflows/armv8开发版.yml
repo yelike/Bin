@@ -129,6 +129,7 @@ jobs:
         rm -f *.img
         sudo wget https://github.com/bin20088/Bin/releases/download/公告/Armbian_20.10_Aml-s9xxx_buster_5.8.16-flippy-46+.img.xz
         sudo xz -d Armbian_20.10_Aml-s9xxx_buster_5.8.16-flippy-46+.img.xz
+        cd /opt/openwrt
         sudo ./mk_s905x3_opimg.sh
         sudo ./mk_n1_opimg.sh
         sudo ./n1-to-vplus.sh
