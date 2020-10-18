@@ -13,10 +13,6 @@ on:
     - cron: 30 23 * * *
 
 env:
-  kREPO_URL: https://github.com/coolsnowwolf/lede #开发版仓库
-  wREPO_URL: https://github.com/coolsnowwolf/openwrt #稳定版仓库
-  kREPO_BRANCH: master #开发版分支
-  wREPO_BRANCH: lede-17.01 #稳定版分支
   UPLOAD_BIN_DIR: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
