@@ -15,7 +15,6 @@ on:
 env:
   UPLOAD_BIN_DIR: true
   UPLOAD_RELEASE: true
-  TZ: Asia/Shanghai
 
 jobs:
 
@@ -24,13 +23,6 @@ jobs:
     steps:    
     - name: Checkout
       uses: actions/checkout@main
-    - name: Initialization environment #初始化环境
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        sudo timedatectl set-timezone "$TZ"
-        sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
     - name: Build firmware #打包
       id: build
       run: |
@@ -48,31 +40,24 @@ jobs:
         sudo ./mk_beikeyun_opimg.sh
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
-        echo "::set-output name=status::success"
-    - name: Organize files #此处操作是发布时因权限问题失败
-      id: organize
-      if: steps.build.outputs.status == 'success' && !cancelled()
-      run: |
-        sudo cp /opt/openwrt/tmp/*.img /workdir
-        cd /workdir
-        bzip2 *.img
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        cd /opt/openwrt/tmp
+        sudo bzip2 *.img
         echo "::set-output name=status::success"
     - name: Upload bin directory #上传artifact
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      if: steps.build.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: k+0
-        path: ${{ env.FIRMWARE }}
+        path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
       uses: ncipollo/release-action@v1
-      if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
         tag: armv8开发版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
-        artifacts: ${{ env.FIRMWARE }}
+        artifacts: /opt/openwrt/tmp/*.img.bz2
 
 
   kbuild: #开发+版
@@ -80,13 +65,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-    - name: Initialization environment #初始化环境
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        sudo timedatectl set-timezone "$TZ"
-        sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
     - name: Build firmware #打包
       id: build
       run: |
@@ -102,31 +80,24 @@ jobs:
         sudo ./mk_s905x3_opimg.sh
         sudo ./mk_n1_opimg.sh
         sudo ./n1-to-vplus.sh
-        echo "::set-output name=status::success"
-    - name: Organize files #此处操作是发布时因权限问题失败
-      id: organize
-      if: steps.build.outputs.status == 'success' && !cancelled()
-      run: |
-        sudo cp /opt/openwrt/tmp/*.img /workdir
-        cd /workdir
-        bzip2 *.img
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        cd /opt/openwrt/tmp
+        sudo bzip2 *.img
         echo "::set-output name=status::success"
     - name: Upload bin directory #上传artifact
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      if: steps.build.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: k+
-        path: ${{ env.FIRMWARE }}
+        path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
       uses: ncipollo/release-action@v1
-      if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
         tag: armv8开发版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
-        artifacts: ${{ env.FIRMWARE }}
+        artifacts: /opt/openwrt/tmp/*.img.bz2
 
 
   wbuild0: #稳定+0版
@@ -134,13 +105,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-    - name: Initialization environment #初始化环境
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        sudo timedatectl set-timezone "$TZ"
-        sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
     - name: Build firmware #打包
       id: build
       run: |
@@ -158,31 +122,24 @@ jobs:
         sudo ./mk_beikeyun_opimg.sh
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
-        echo "::set-output name=status::success"
-    - name: Organize files #此处操作是发布时因权限问题失败
-      id: organize
-      if: steps.build.outputs.status == 'success' && !cancelled()
-      run: |
-        sudo cp /opt/openwrt/tmp/*.img /workdir
-        cd /workdir
-        bzip2 *.img
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        cd /opt/openwrt/tmp
+        sudo bzip2 *.img
         echo "::set-output name=status::success"
     - name: Upload bin directory #上传artifact
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      if: steps.build.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: w+0
-        path: ${{ env.FIRMWARE }}
+        path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
       uses: ncipollo/release-action@v1
-      if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
         tag: armv8稳定版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
-        artifacts: ${{ env.FIRMWARE }}
+        artifacts: /opt/openwrt/tmp/*.img.bz2
 
 
   wbuild: #稳定+版
@@ -190,13 +147,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@main
-    - name: Initialization environment #初始化环境
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        sudo timedatectl set-timezone "$TZ"
-        sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
     - name: Build firmware #打包
       id: build
       run: |
@@ -212,31 +162,24 @@ jobs:
         sudo ./mk_s905x3_opimg.sh
         sudo ./mk_n1_opimg.sh
         sudo ./n1-to-vplus.sh
-        echo "::set-output name=status::success"
-    - name: Organize files #此处操作是发布时因权限问题失败
-      id: organize
-      if: steps.build.outputs.status == 'success' && !cancelled()
-      run: |
-        sudo cp /opt/openwrt/tmp/*.img /workdir
-        cd /workdir
-        bzip2 *.img
-        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        cd /opt/openwrt/tmp
+        sudo bzip2 *.img
         echo "::set-output name=status::success"
     - name: Upload bin directory #上传artifact
       uses: actions/upload-artifact@main
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      if: steps.build.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: w+
-        path: ${{ env.FIRMWARE }}
+        path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
       uses: ncipollo/release-action@v1
-      if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
+      if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
         tag: armv8稳定版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
-        artifacts: ${{ env.FIRMWARE }}
+        artifacts: /opt/openwrt/tmp/*.img.bz2
 
 
   over:
