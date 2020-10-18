@@ -136,7 +136,7 @@ jobs:
         name: w+0
         path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
-      uses: ncipollo/release-action@main
+      uses: ncipollo/release-action@v1
       if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
