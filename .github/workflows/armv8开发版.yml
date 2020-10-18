@@ -134,7 +134,7 @@ jobs:
         path: ${{ env.FIRMWARE }}
 
     - name: Create release
-      uses: ncipollo/release-action@main
+      uses: ncipollo/release-action@v1
       if: env.UPLOAD_RELEASE == 'true' && steps.organize.outputs.status == 'success' && !cancelled()
       with:
         name: ${{ env.DATE }} 🚀 armv8开发版 | 自动编译
