@@ -71,9 +71,8 @@ jobs:
         sudo ./mk_beikeyun_opimg.sh
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo mkdir /workdir/openwrt/bin #此处操作是因为发布时在opt目录下会因权限问题导致失败
-        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin
-        cd /workdir/openwrt/bin
+        sudo chmod -R 777 /opt/openwrt/tmp
+        cd /opt/openwrt/tmp
         bzip2 *.img
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
@@ -143,9 +142,8 @@ jobs:
         sudo ./mk_s905x3_opimg.sh
         sudo ./mk_n1_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo mkdir /workdir/openwrt/bin #此处操作是因为发布时在opt目录下会因权限问题导致失败
-        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin
-        cd /workdir/openwrt/bin
+        sudo chmod -R 777 /opt/openwrt/tmp
+        cd /opt/openwrt/tmp
         bzip2 *.img
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
@@ -216,9 +214,8 @@ jobs:
         sudo ./mk_beikeyun_opimg.sh
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo mkdir /workdir/openwrt/bin #此处操作是因为发布时在opt目录下会因权限问题导致失败
-        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin
-        cd /workdir/openwrt/bin
+        sudo chmod -R 777 /opt/openwrt/tmp
+        cd /opt/openwrt/tmp
         bzip2 *.img
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
@@ -287,9 +284,8 @@ jobs:
         sudo ./mk_s905x3_opimg.sh
         sudo ./mk_n1_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo mkdir /workdir/openwrt/bin #此处操作是因为发布时在opt目录下会因权限问题导致失败
-        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin
-        cd /workdir/openwrt/bin
+        sudo chmod -R 777 /opt/openwrt/tmp
+        cd /opt/openwrt/tmp
         bzip2 *.img
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
