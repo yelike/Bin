@@ -123,6 +123,16 @@ jobs:
         sudo ./mk_beikeyun_opimg.sh
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
+        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin/targets/armvirt/64
+        rm -rf /opt/openwrt/tmp/*.img
+        cd /opt/imgs
+        rm -f *.img
+        sudo wget https://github.com/bin20088/Bin/releases/download/公告/Armbian_20.10_Aml-s9xxx_buster_5.8.16-flippy-46+.img.xz
+        sudo xz -d Armbian_20.10_Aml-s9xxx_buster_5.8.16-flippy-46+.img.xz
+        sudo ./mk_s905x3_opimg.sh
+        sudo ./mk_n1_opimg.sh
+        sudo ./n1-to-vplus.sh
+        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin/targets/armvirt/64
         echo "::set-output name=status::success"
 
     - name: Organize files
@@ -130,7 +140,6 @@ jobs:
       if: steps.build.outputs.status == 'success' && !cancelled()
       run: |
         echo "${{ env.useVersionInfo }}" > openwrt/bin/${{ env.DATE }}更新说明.md
-        sudo cp /opt/openwrt/tmp/*.img /workdir/openwrt/bin/targets/armvirt/64
         cd /workdir/
         tar -zcvf bin.tar.gz openwrt/bin
         cp bin.tar.gz openwrt/bin/targets/*/*
