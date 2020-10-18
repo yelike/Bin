@@ -50,10 +50,12 @@ jobs:
         name: k+0
         path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@main
       if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
+        omitBodyDuringUpdate: true
+        omitNameDuringUpdate: true
         tag: armv8开发版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
@@ -90,10 +92,12 @@ jobs:
         name: k+
         path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@main
       if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
+        omitBodyDuringUpdate: true
+        omitNameDuringUpdate: true
         tag: armv8开发版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
@@ -132,10 +136,12 @@ jobs:
         name: w+0
         path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@main
       if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
+        omitBodyDuringUpdate: true
+        omitNameDuringUpdate: true
         tag: armv8稳定版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
@@ -172,10 +178,12 @@ jobs:
         name: w+
         path: /opt/openwrt/tmp/*.img.bz2
     - name: Create release #发布
-      uses: ncipollo/release-action@v1
+      uses: ncipollo/release-action@main
       if: env.UPLOAD_RELEASE == 'true' && steps.build.outputs.status == 'success' && !cancelled()
       with:
         allowUpdates: true
+        omitBodyDuringUpdate: true
+        omitNameDuringUpdate: true
         tag: armv8稳定版
         commit: master
         token: ${{ secrets.RELEASES_TOKEN }}
