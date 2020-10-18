@@ -71,9 +71,9 @@ jobs:
         sudo ./mk_beikeyun_opimg.sh
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo chmod -R 777 /opt/openwrt/tmp
         cd /opt/openwrt/tmp
-        bzip2 *.img
+        sudo bzip2 *.img
+        sudo chmod -R 777 /opt/openwrt/tmp
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     - name: Upload bin directory #上传artifact
@@ -142,9 +142,9 @@ jobs:
         sudo ./mk_s905x3_opimg.sh
         sudo ./mk_n1_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo chmod -R 777 /opt/openwrt/tmp
         cd /opt/openwrt/tmp
-        bzip2 *.img
+        sudo bzip2 *.img
+        sudo chmod -R 777 /opt/openwrt/tmp
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     - name: Upload bin directory #上传artifact
@@ -214,9 +214,9 @@ jobs:
         sudo ./mk_beikeyun_opimg.sh
         sudo ./mk_l1pro_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo chmod -R 777 /opt/openwrt/tmp
         cd /opt/openwrt/tmp
-        bzip2 *.img
+        sudo bzip2 *.img
+        sudo chmod -R 777 /opt/openwrt/tmp
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     - name: Upload bin directory #上传artifact
@@ -284,9 +284,9 @@ jobs:
         sudo ./mk_s905x3_opimg.sh
         sudo ./mk_n1_opimg.sh
         sudo ./n1-to-vplus.sh
-        sudo chmod -R 777 /opt/openwrt/tmp
         cd /opt/openwrt/tmp
-        bzip2 *.img
+        sudo bzip2 *.img
+        sudo chmod -R 777 /opt/openwrt/tmp
         echo "::set-output name=status::success"
         echo "FIRMWARE=$PWD" >> $GITHUB_ENV
     - name: Upload bin directory #上传artifact
@@ -307,3 +307,11 @@ jobs:
         body: |
           ${{ env.useVersionInfo }}
         artifacts: ${{ env.FIRMWARE }}
+
+
+  over:
+    needs: [kbuild0, kbuild, wbuild0, wbuild]
+    runs-on: ubuntu-18.04
+    steps:
+    - name: WeChat notification
+      run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=打包成功完成
